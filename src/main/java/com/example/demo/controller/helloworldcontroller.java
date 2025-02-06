@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CountryDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -28,6 +29,16 @@ public class helloworldcontroller {
             return countries;
         }
         //readSpecific
+    @GetMapping("/{id}")
+        public ResponseEntity<CountryDto> findById(@PathVariable("id") final long id){
+
+            for(var country:countries) {
+                if (country.getId() == id) {
+                    return ResponseEntity.ok(country);
+                }
+            }
+            return ResponseEntity.notFound().build();
+        }
         //filtering
 
         //UPDATE - PUT/PATCH
